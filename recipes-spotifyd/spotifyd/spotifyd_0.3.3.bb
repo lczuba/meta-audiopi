@@ -405,3 +405,17 @@ LICENSE = "GPL-3.0-only"
 # what cargo-bitbake generates.
 include spotifyd-${PV}.inc
 include spotifyd.inc
+
+################################
+
+FILESEXTRAPATHS_append := ":${THISDIR}"
+
+SRC_URI += "file://spotifyd.conf"
+
+do_install_append() {
+  install -d ${D}${sysconfdir}
+  install -m 0755 ${WORKDIR}/spotifyd.conf ${D}${sysconfdir}
+
+}
+
+FILES_${PN} += "${sysconfdir}"

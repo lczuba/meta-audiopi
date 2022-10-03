@@ -10,7 +10,7 @@ MACHINE = "raspberrypi4-64"
 ENABLE_UART = "1"
 
 #IMAGE_INSTALL_append = " alsa-lib alsa-utils alsa-plugin alsa-tools aplay"
-IMAGE_INSTALL_append = " spotifyd"
+IMAGE_INSTALL_append = " spotifyd i2c-tools"
 
 INSTALL_append= "rpi-config"
 IMAGE_FSTYPES = "tar.xz ext3 rpi-sdimg"
