@@ -408,8 +408,6 @@ include spotifyd.inc
 
 ################################
 
-FILESEXTRAPATHS_append := ":${THISDIR}"
-
 SRC_URI += "file://spotifyd.conf"
 
 do_install_append() {
