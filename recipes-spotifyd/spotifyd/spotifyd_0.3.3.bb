@@ -408,12 +408,22 @@ include spotifyd.inc
 
 ################################
 
-SRC_URI += "file://spotifyd.conf"
+SRC_URI += " \
+  file://spotifyd.conf \
+  file://spotifyd.service \
+"
+inherit systemd
+
+SYSTEMD_AUTO_ENABLE = "enable"
+SYSTEMD_SERVICE_${PN} = "spotifyd.service"
 
 do_install_append() {
   install -d ${D}${sysconfdir}
   install -m 0755 ${WORKDIR}/spotifyd.conf ${D}${sysconfdir}
 
+  install -d ${D}${systemd_system_unitdir}
+  install -m 0755 ${WORKDIR}/spotifyd.service ${D}${systemd_system_unitdir}
 }
 
 FILES_${PN} += "${sysconfdir}"
+FILES_${PN} += "${systemd_system_unitdir}"
