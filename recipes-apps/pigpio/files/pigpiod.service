@@ -4,7 +4,7 @@ Description=Pigpio daemon
 [Service]
 Type=forking
 PIDFile=pigpio.pid
-ExecStart=/usr/bin/pigpiod -k -t 0
+ExecStart=/usr/bin/pigpiod -l -t 0
 
 [Install]
 WantedBy=multi-user.target
