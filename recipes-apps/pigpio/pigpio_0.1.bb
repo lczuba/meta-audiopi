@@ -21,5 +21,6 @@ do_install_append() {
   install -m 0755 ${WORKDIR}/pigpiod.service ${D}${systemd_system_unitdir}
 }
 
+SYSROOT_DIRS += "${bindir}"
 FILES_${PN} += "/usr ${optdir} ${includedir} ${libdir} ${bindir} ${systemd_system_unitdir}"
 
