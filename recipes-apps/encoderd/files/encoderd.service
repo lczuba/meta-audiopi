@@ -1,0 +1,15 @@
+[Unit]
+Description=Encoderd daemon
+Wants=sound.target
+After=sound.target
+Wants=pigpiod.service
+After=pigpiod.service
+
+[Service]
+ExecStart=/usr/bin/encoderd
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target
+

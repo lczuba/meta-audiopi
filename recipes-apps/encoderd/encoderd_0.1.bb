@@ -2,15 +2,22 @@ SUMMARY = "Encoder daemon"
 DESCRIPTION = "Encoder daemon"
 LICENSE = "CLOSED"
 
-SRC_URI = "file://encoderd.cpp"
+SRC_URI = "git://github.com/lczuba/encoderd.git;protocol=https;branch=main"
+SRCREV="${AUTOREV}"
+S = "${WORKDIR}/git"
 
-S = "${WORKDIR}"
+inherit pkgconfig cmake
 
-do_compile() {
-    ${CXX} encoderd.cpp ${LDFLAGS} -o encoderd 
+DEPENDS += " pigpio alsa-lib"
+
+SRC_URI += "file://encoderd.service"
+SYSTEMD_AUTO_ENABLE = "enable"
+SYSTEMD_SERVICE_${PN} = "encoderd.service"
+
+do_install_append() {
+  install -d ${D}${systemd_system_unitdir}
+  install -m 0755 ${WORKDIR}/encoderd.service ${D}${systemd_system_unitdir}
 }
 
-do_install() {
-    install -d ${D}${bindir}
-    install -m 0755 encoderd ${D}${bindir}
-}
+FILES_${PN} += "${systemd_system_unitdir}"
+
